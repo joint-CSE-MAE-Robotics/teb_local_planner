@@ -1212,7 +1212,7 @@ bool TebOptimalPlanner::isTrajectoryFeasible(base_local_planner::CostmapModel* c
   
   for (int i=0; i <= look_ahead_idx; ++i)
   {           
-    if ( costmap_model->footprintCost(teb().Pose(i).x(), teb().Pose(i).y(), teb().Pose(i).theta(), footprint_spec, inscribed_radius, circumscribed_radius) < 0 )
+    if ( (costmap_model->footprintCost(teb().Pose(i).x(), teb().Pose(i).y(), teb().Pose(i).theta(), footprint_spec, inscribed_radius, circumscribed_radius)) < 0.0 )
     {
       if (visualization_)
       {
@@ -1238,8 +1238,8 @@ bool TebOptimalPlanner::isTrajectoryFeasible(base_local_planner::CostmapModel* c
           intermediate_pose.position() = intermediate_pose.position() + delta_dist / (n_additional_samples + 1.0);
           intermediate_pose.theta() = g2o::normalize_theta(intermediate_pose.theta() + 
                                                            delta_rot / (n_additional_samples + 1.0));
-          if ( costmap_model->footprintCost(intermediate_pose.x(), intermediate_pose.y(), intermediate_pose.theta(),
-            footprint_spec, inscribed_radius, circumscribed_radius) == -1 )
+          if ( (costmap_model->footprintCost(intermediate_pose.x(), intermediate_pose.y(), intermediate_pose.theta(),
+            footprint_spec, inscribed_radius, circumscribed_radius)) < 0.0 )
           {
             if (visualization_) 
             {

@@ -206,8 +206,8 @@ void TimedElasticBand::autoResize(double dt_ref, double dt_hysteresis, int min_s
   /// iterate through all TEB states and add/remove states!
   bool modified = true;
 
-  for (int rep = 0; rep < 100 && modified; ++rep) // actually it should be while(), but we want to make sure to not get stuck in some oscillation, hence max 100 repitions.
-  {
+  for (int rep = 0; rep < 5 && modified; ++rep) // actually it should be while(), but we want to make sure to not get stuck in some oscillation, hence max 100 repitions.
+  {// 100
     modified = false;
 
     for(int i=0; i < sizeTimeDiffs(); ++i) // TimeDiff connects Point(i) with Point(i+1)
